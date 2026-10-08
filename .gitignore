@@ -6,3 +6,7 @@ review-*.png
 desktop-*.png
 mobile-*.png
 .chrome-temp/
+.npm-cache/
+.vercel-appdata/
+.git-test*/
+.github-upload.json
