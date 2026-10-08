@@ -1,3 +1,5 @@
+const { createHash } = require('node:crypto');
+const { put } = require('@vercel/blob');
 const EMAIL = /^[^\s@]{1,64}@[^\s@]{1,190}\.[^\s@]{2,}$/;
 
 module.exports = async function handler(req, res) {
@@ -8,24 +10,14 @@ module.exports = async function handler(req, res) {
   }
   const email = String(req.body?.email || '').trim().toLowerCase();
   if (!EMAIL.test(email)) return res.status(400).json({ error: 'Please enter a valid email address.' });
-  const url = process.env.SUPABASE_URL;
-  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
-  if (!url || !key) return res.status(503).json({ error: 'The waitlist is temporarily unavailable. Please try again later.' });
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return res.status(503).json({ error: 'The waitlist is temporarily unavailable. Please try again later.' });
   try {
-    const response = await fetch(`${url.replace(/\/$/, '')}/rest/v1/band_waitlist`, {
-      method: 'POST',
-      headers: {
-        apikey: key,
-        Authorization: `Bearer ${key}`,
-        'Content-Type': 'application/json',
-        Prefer: 'resolution=ignore-duplicates,return=minimal'
-      },
-      body: JSON.stringify({ email, source: 'zenn-band-page' })
+    const id = createHash('sha256').update(email).digest('hex');
+    await put(`waitlist/${id}.json`, JSON.stringify({ email, source: 'zenn-band-page', updatedAt: new Date().toISOString() }), {
+      access: 'private',
+      allowOverwrite: true,
+      contentType: 'application/json'
     });
-    if (!response.ok) {
-      console.error('Waitlist storage failed', response.status);
-      return res.status(502).json({ error: 'Could not join right now. Please try again later.' });
-    }
     return res.status(200).json({ ok: true });
   } catch (error) {
     console.error('Waitlist storage unavailable', error?.name || 'unknown');
