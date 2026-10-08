@@ -10,3 +10,7 @@ mobile-*.png
 .vercel-appdata/
 .git-test*/
 .github-upload.json
+.env.local
+
+.vercel
+.env*
