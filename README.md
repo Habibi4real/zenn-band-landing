@@ -8,7 +8,7 @@ Single-page Zenn Band concept website. The page invites visitors to join a waitl
 2. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in the Vercel project environment. Never expose the service role key to the browser or commit it.
 3. Deploy to Vercel. `POST /api/waitlist` validates the email and stores it in `band_waitlist`, ignoring duplicates.
 
-Until step 1 and 2 are complete, the form returns an explicit temporary-unavailable message rather than claiming signup succeeded.
+Until step 1 and 2 are complete, the form returns an explicit temporary-unavailable message and offers an email alternative. It does not claim signup succeeded.
 
 ## Local preview
 
