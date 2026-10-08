@@ -1,0 +1,8 @@
+.vercel/
+.env*
+node_modules/
+reference-*.png
+review-*.png
+desktop-*.png
+mobile-*.png
+.chrome-temp/
