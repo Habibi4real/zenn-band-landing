@@ -39,7 +39,12 @@ form.addEventListener('submit', async event => {
     status.classList.add('success');
     form.reset();
   } catch (error) {
-    status.textContent = error.message;
+    status.textContent = `${error.message} You can join by email instead: `;
+    const link = document.createElement('a');
+    link.href = `mailto:contact.zennapp@gmail.com?subject=${encodeURIComponent('Join Zenn Band waitlist')}&body=${encodeURIComponent(`Please add ${email} to the Zenn Band waitlist.`)}`;
+    link.textContent = 'Send email ↗';
+    link.style.textDecoration = 'underline';
+    status.append(link);
     status.classList.add('error');
   } finally {
     submit.disabled = false;
