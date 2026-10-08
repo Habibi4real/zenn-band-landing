@@ -8,3 +8,5 @@ mobile-*.png
 .git/
 .git-test*/
 .github-upload.json
+.env.local
+node_modules/
