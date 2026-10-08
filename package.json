@@ -1,0 +1,10 @@
+{
+  "name": "zenn-band-page",
+  "version": "1.0.0",
+  "description": "Single-page Zenn Band concept website. The page invites visitors to join a waitlist; it has no checkout or purchasing flow. Product imagery is an original concept render.",
+  "private": true,
+  "type": "commonjs",
+  "dependencies": {
+    "@vercel/blob": "^2.3.0"
+  }
+}
