@@ -13,6 +13,13 @@ nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', 'Open menu');
 }));
 
+const storyRail = document.querySelector('.card-rail');
+document.querySelectorAll('[data-rail]').forEach(button => button.addEventListener('click', () => {
+  const direction = button.dataset.rail === 'next' ? 1 : -1;
+  const card = storyRail.querySelector('.story-card');
+  storyRail.scrollBy({ left: direction * (card.getBoundingClientRect().width + 8), behavior: 'smooth' });
+}));
+
 const form = document.getElementById('waitlist-form');
 const status = document.getElementById('form-status');
 const submit = form.querySelector('button[type="submit"]');

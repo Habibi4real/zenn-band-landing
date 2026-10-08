@@ -1,5 +1,7 @@
 reference-*.png
 review-*.png
+review-layout.cjs
+assets/zenn-band.png
 desktop-*.png
 mobile-*.png
 .chrome-temp/
