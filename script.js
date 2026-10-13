@@ -71,7 +71,7 @@ form.addEventListener('submit', async event => {
   submit.disabled = true;
   status.textContent = 'Joining…';
   try {
-    const body = await postWaitlist({ email });
+    const body = await postWaitlist({ email, bandInterest: wantsBand });
     signupToken = body.signupToken;
     status.textContent = 'You’re on the list.';
     status.classList.add('success');

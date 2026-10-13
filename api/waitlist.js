@@ -41,6 +41,11 @@ module.exports = async function handler(req, res) {
     await put(`waitlist/${emailHash}.json`, JSON.stringify({ email, source: 'zenn-website', updatedAt: new Date().toISOString() }), {
       access: 'private', allowOverwrite: true, contentType: 'application/json'
     });
+    if (req.body?.bandInterest === true) {
+      await put(`band-interest/${emailHash}.json`, JSON.stringify({ emailHash, bandInterest: true, updatedAt: new Date().toISOString() }), {
+        access: 'private', allowOverwrite: true, contentType: 'application/json'
+      });
+    }
     const expiry = String(Date.now() + 60 * 60 * 1000);
     return res.status(200).json({ ok: true, signupToken: `${emailHash}.${expiry}.${sign(`${emailHash}.${expiry}`)}` });
   } catch (error) {
