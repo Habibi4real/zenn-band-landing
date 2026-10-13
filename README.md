@@ -1,7 +1,6 @@
 # Zenn landing page
 
-Single-page Zenn website for private beta signup. Zenn Band is presented as a later product concept. The page has no checkout or purchasing flow; the Band image is an original concept render.
-The `/band/` page expands the concept with proposed usage, control, FAQs, and a Band-interest waitlist. Hardware specifications, pricing, and release date are deliberately left unconfirmed.
+Zenn Band-first website for joining the product waitlist. The homepage introduces the wearable as a new interface to Zenn and explains the assistant behind it. The `/band/` page expands the concept with proposed usage, control, and FAQs. The site has no checkout or purchasing flow; the Band image is an original concept render. Hardware specifications, pricing, and release date are deliberately left unconfirmed.
 
 Production: https://zenn-band-page.vercel.app
 

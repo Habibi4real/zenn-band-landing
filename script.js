@@ -43,12 +43,6 @@ document.getElementById('demo-prev').addEventListener('click', () => showExample
 document.getElementById('demo-next').addEventListener('click', () => showExample(exampleIndex + 1));
 showExample(0);
 
-let wantsBand = false;
-document.querySelectorAll('[data-band-interest]').forEach(link => link.addEventListener('click', () => {
-  wantsBand = true;
-  document.getElementById('band-interest').checked = true;
-}));
-
 const form = document.getElementById('waitlist-form');
 const status = document.getElementById('form-status');
 const submit = form.querySelector('button[type="submit"]');
@@ -71,11 +65,10 @@ form.addEventListener('submit', async event => {
   submit.disabled = true;
   status.textContent = 'Joining…';
   try {
-    const body = await postWaitlist({ email, bandInterest: wantsBand });
+    const body = await postWaitlist({ email, bandInterest: true });
     signupToken = body.signupToken;
     status.textContent = 'You’re on the list.';
     status.classList.add('success');
-    document.getElementById('band-interest').checked = wantsBand;
     document.getElementById('thank-you').hidden = false;
     document.getElementById('thank-you').scrollIntoView({ behavior: 'smooth', block: 'start' });
     form.reset();
@@ -93,17 +86,16 @@ interestForm.addEventListener('submit', async event => {
   const interestStatus = document.getElementById('interest-status');
   const button = interestForm.querySelector('button[type="submit"]');
   const delegate = document.getElementById('delegate').value.trim();
-  const bandInterest = document.getElementById('band-interest').checked;
   interestStatus.className = 'form-status';
-  if (!delegate && !bandInterest) {
-    interestStatus.textContent = 'Add an idea or select Zenn Band to share your interests.';
+  if (!delegate) {
+    interestStatus.textContent = 'Add an idea to share it with us.';
     interestStatus.classList.add('error');
     return;
   }
   button.disabled = true;
   interestStatus.textContent = 'Saving…';
   try {
-    await postWaitlist({ mode: 'interests', signupToken, delegate, bandInterest });
+    await postWaitlist({ mode: 'interests', signupToken, delegate, bandInterest: true });
     interestStatus.textContent = 'Thanks. Your interests have been saved.';
     interestStatus.classList.add('success');
   } catch (error) {

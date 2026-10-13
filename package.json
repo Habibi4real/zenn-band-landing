@@ -1,7 +1,7 @@
 {
   "name": "zenn-band-page",
   "version": "1.0.0",
-  "description": "Single-page Zenn private beta website with optional Zenn Band interest and no checkout.",
+  "description": "Zenn Band concept and waitlist website with no checkout.",
   "private": true,
   "type": "commonjs",
   "dependencies": {
