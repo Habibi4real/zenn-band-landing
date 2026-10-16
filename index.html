@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#050505">
-  <meta name="description" content="Zenn is your personal AI operator. It learns you, acts across your apps and is always within reach with Zenn Band.">
-  <title>Zenn — Your life, on autopilot</title>
+  <meta name="description" content="Zenn is a personal AI that learns you, gets things done across your apps, and is always with you — on your phone and your wrist.">
+  <title>Zenn — Your life, on autopilot.</title>
   <link rel="icon" href="assets/zenn-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,85 +13,198 @@
   <link rel="stylesheet" href="premium.css">
 </head>
 <body>
-<header class="site-header" id="top">
-  <a class="brand" href="#top">ZENN</a>
-  <nav class="desktop-nav" id="main-nav">
-    <a href="#product">Product</a><a href="#band">Zenn / Band</a><a href="#features">Features</a><a href="#about">About</a>
+<header class="site-header">
+  <a class="wordmark" href="#top">ZENN</a>
+  <nav class="desktop-nav" id="main-nav" aria-label="Main navigation">
+    <a href="#product">Product</a>
+    <a href="#band">Zenn / Band</a>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
   </nav>
-  <a class="pill light" href="#early-access">Join Waitlist</a>
-  <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">☰</button>
+  <a class="pill pill-white" href="#early-access">Join Waitlist</a>
+  <button class="menu-toggle" type="button" aria-controls="main-nav" aria-expanded="false">☰</button>
 </header>
 
-<main>
+<main id="top">
   <section class="hero" id="product">
-    <img class="hero-bg" src="assets/zenn-hero.webp" alt="Zenn Band in the mountains at golden hour" fetchpriority="high">
-    <div class="hero-overlay"></div>
-    <div class="shell hero-content">
-      <div class="hero-copy">
-        <h1>Your life,<br>on <span>autopilot.</span></h1>
-        <p>Zenn is a personal AI that learns you, gets things done across your apps, and is always with you — on your phone and your wrist.</p>
-        <div class="actions"><a class="pill light" href="#early-access">Join Waitlist <b>→</b></a><a class="watch" href="#features"><i>▶</i> Watch Video</a></div>
-        <div class="early"><div class="avatars"><span>AZ</span><span>AK</span><span>JM</span><span>+</span></div><div><b>Join early access</b><small>Be the first to experience Zenn.</small></div></div>
+    <div class="hero-bg"></div>
+    <div class="hero-band"><img src="assets/zenn-band-studio.png" alt="Zenn Band"></div>
+    <div class="hero-copy">
+      <h1>Your life,<br>on <span>autopilot.</span></h1>
+      <p>Zenn is a personal AI that learns you, gets things done across your apps, and is always with you — on your phone and your wrist.</p>
+      <div class="hero-actions">
+        <a class="pill pill-white" href="#early-access">Join Waitlist <b>→</b></a>
+        <a class="pill pill-ghost" href="#features"><span class="play">▶</span> Watch Video</a>
+      </div>
+      <div class="early-access">
+        <div class="avatar-stack"><span>A</span><span>Z</span><span>E</span><span>+</span></div>
+        <div><strong>Join early access</strong><small>Be the first to experience Zenn.</small></div>
       </div>
     </div>
   </section>
 
-  <section class="intro section-light" id="about">
-    <div class="shell narrow center">
-      <span class="eyebrow">MEET ZENN</span>
+  <section class="meet" id="about">
+    <div class="section-inner centered">
+      <span class="kicker">MEET ZENN</span>
       <h2>More than an assistant.<br>A second brain that acts.</h2>
-      <p class="lead">Zenn learns your work, your habits and your goals, and turns them into action. It doesn't just answer — it plans, follows up and gets things done for you.</p>
-      <div class="four-grid icon-grid">
-        <article><div class="icon">◉</div><h3>Learns you</h3><p>Adapts to your work, preferences and way of thinking.</p></article>
-        <article><div class="icon">ϟ</div><h3>Takes action</h3><p>Works across your apps and the web.</p></article>
-        <article><div class="icon">□</div><h3>Stays proactive</h3><p>Follows up on unfinished work and reminds you what matters.</p></article>
-        <article><div class="icon">▣</div><h3>Always with you</h3><p>On your phone and your wrist with the Zenn Band.</p></article>
+      <p class="subcopy">Zenn learns your work, your habits and your goals, and turns them into action. It doesn't just answer — it plans, follows up and gets things done for you.</p>
+
+      <div class="four-up">
+        <article>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>
+          <h3>Learns you</h3>
+          <p>Adapts to your work, preferences and way of thinking.</p>
+        </article>
+        <article>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-7 12h6l-1 8 7-12h-6z"/></svg>
+          <h3>Takes action</h3>
+          <p>Works across your apps and the web.</p>
+        </article>
+        <article>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="6" width="16" height="14" rx="2"/><path d="M8 2v4M16 2v4M4 10h16"/></svg>
+          <h3>Stays proactive</h3>
+          <p>Follows up on unfinished work and reminds you what matters.</p>
+        </article>
+        <article>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M9 6h6M9 18h6"/></svg>
+          <h3>Always with you</h3>
+          <p>On your phone and your wrist with the Zenn Band.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="band-feature section-light" id="band">
-    <div class="shell split">
-      <div class="copy"><span class="eyebrow">ZENN BAND</span><h2>Instant access<br>to a smarter you.</h2><p class="lead">The Zenn Band keeps your AI always within reach. Talk naturally, get things done and stay focused — without constantly checking your phone.</p>
-        <div class="mini-grid"><div><b>◖))</b><strong>Voice first</strong><p>Just speak. Zenn listens, understands and acts.</p></div><div><b>✓</b><strong>Discreet & minimal</strong><p>A clean, elegant design for everyday wear.</p></div><div><b>⌁</b><strong>Always connected</strong><p>Instant access to Zenn anytime, anywhere.</p></div></div>
-        <a class="pill dark" href="#early-access">Join Waitlist <b>→</b></a>
+  <section class="band-section" id="band">
+    <div class="band-copy section-pad">
+      <span class="kicker">ZENN BAND</span>
+      <h2>Instant access<br>to a smarter you.</h2>
+      <p class="subcopy left">The Zenn Band keeps your AI always within reach. Talk naturally, get things done and stay focused — without constantly checking your phone.</p>
+
+      <div class="band-features">
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg>
+          <strong>Voice first</strong>
+          <p>Just speak. Zenn listens, understands and acts.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>
+          <strong>Discreet & minimal</strong>
+          <p>A clean, elegant design for everyday wear.</p>
+        </div>
+        <div>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10M7 17h10M9 7v10M15 7v10"/></svg>
+          <strong>Always connected</strong>
+          <p>Instant access to Zenn anytime, anywhere.</p>
+        </div>
       </div>
-      <div class="band-photo"><img src="assets/zenn-band-everyday.png" alt="Zenn Band worn on wrist"></div>
+      <a class="pill pill-dark" href="#early-access">Join Waitlist <b>→</b></a>
     </div>
+    <div class="band-image"><img src="assets/zenn-band-everyday.png" alt="Zenn Band on wrist"></div>
   </section>
 
   <section class="actions-section" id="features">
-    <div class="shell center"><span class="eyebrow inverse">REAL ACTIONS</span><h2>It does the work for you.</h2><p class="lead muted">Zenn can complete tasks across your apps, on the web and in the real world. From booking a flight to calling a business, it handles the details.</p>
+    <div class="section-inner centered">
+      <span class="kicker kicker-dark">REAL ACTIONS</span>
+      <h2>It does the work for you.</h2>
+      <p class="subcopy dark-subcopy">Zenn can complete tasks across your apps, on the web and in the real world.<br>From booking a flight to calling a business, it handles the details.</p>
       <div class="action-grid">
-        <article><div class="icon-lg">✈</div><h3>Book flights, hotels<br>and trips</h3></article>
-        <article><div class="icon-lg">▱</div><h3>Shop and buy<br>for you</h3></article>
-        <article><div class="icon-lg">☎</div><h3>Call people or<br>businesses</h3></article>
-        <article><div class="icon-lg">□</div><h3>Manage your calendar<br>and schedule</h3></article>
-        <article><div class="icon-lg">✓</div><h3>Follow up on<br>unfinished work</h3></article>
-        <article><div class="icon-lg">▦</div><h3>Work across 50+<br>apps and tools</h3></article>
+        <article><span class="action-icon">✈</span><h3>Book flights, hotels<br>and trips</h3></article>
+        <article><span class="action-icon">♧</span><h3>Shop and buy<br>for you</h3></article>
+        <article><span class="action-icon">☎</span><h3>Call people or<br>businesses</h3></article>
+        <article><span class="action-icon">□</span><h3>Manage your calendar<br>and schedule</h3></article>
+        <article><span class="action-icon">✓</span><h3>Follow up on<br>unfinished work</h3></article>
+        <article><span class="action-icon">▦</span><h3>Work across 50+<br>apps and tools</h3></article>
       </div>
     </div>
   </section>
 
   <section class="apps-section">
-    <div class="shell split apps-split">
-      <div class="apps-copy"><span class="eyebrow inverse">YOUR APPS, CONNECTED</span><h2>Works across<br>your entire digital life.</h2><p class="lead muted">Connect your favorite apps and let Zenn handle the rest.</p><div class="app-row"><span>G</span><span>▣</span><span>N</span><span>▰</span><span>◉</span><span>+</span></div><a class="pill outline-light" href="#early-access">View all integrations <b>→</b></a></div>
-      <div class="phone-wrap"><div class="phone"><div class="notch"></div><div class="phone-top">9:01 <strong>ZENN</strong></div><div class="bubble">Book me a flight to Paris next week and find a nice hotel near the city center.</div><ul><li>✈ <span>Searching for flights...</span></li><li>▰ <span>Comparing hotels...</span></li><li>□ <span>Checking your calendar...</span></li><li>✓ <span>Booking and confirming...</span></li></ul></div></div>
+    <div class="apps-copy">
+      <span class="kicker kicker-dark">YOUR APPS, CONNECTED</span>
+      <h2>Works across<br>your entire digital life.</h2>
+      <p class="subcopy left dark-subcopy">Connect your favorite apps and let Zenn handle the rest.</p>
+      <div class="app-icons" aria-label="Connected apps">
+        <span><img src="https://cdn.simpleicons.org/gmail" alt="Gmail"></span>
+        <span><img src="https://cdn.simpleicons.org/googlecalendar" alt="Google Calendar"></span>
+        <span><img src="https://cdn.simpleicons.org/notion/ffffff" alt="Notion"></span>
+        <span><img src="https://cdn.simpleicons.org/slack" alt="Slack"></span>
+        <span><img src="https://cdn.simpleicons.org/whatsapp" alt="WhatsApp"></span>
+        <span class="plus">+</span>
+      </div>
+      <a class="pill pill-outline-light" href="#early-access">View all integrations <b>→</b></a>
+    </div>
+
+    <div class="phone-stage">
+      <div class="phone">
+        <div class="phone-status"><span>9:01</span><strong>ZENN</strong><span>•••</span></div>
+        <div class="phone-request">Book me a flight to Paris next week and find a nice hotel near the city center.</div>
+        <div class="phone-step"><span>✈</span><p>Searching for flights...</p></div>
+        <div class="phone-step"><span>▱</span><p>Comparing hotels...</p></div>
+        <div class="phone-step"><span>□</span><p>Checking your calendar...</p></div>
+        <div class="phone-step"><span>✓</span><p>Booking and confirming...</p></div>
+      </div>
     </div>
   </section>
 
-  <section class="focus section-light">
-    <div class="shell split focus-split"><div class="copy"><span class="eyebrow">LESS DISTRACTIONS. MORE LIFE.</span><h2>Get more done.<br>Spend less time on your phone.</h2><p class="lead">Zenn helps you stay focused by handling the busy work, so you can spend more time on what actually matters.</p><div class="benefits"><div><strong>Save hours</strong><span>every week</span></div><div><strong>Stay focused</strong><span>on what matters</span></div><div><strong>A calmer,</strong><span>more organized life</span></div></div></div><div class="focus-photo"><img src="assets/zenn-band-everyday.png" alt="Using Zenn Band away from the phone"></div></div>
+  <section class="focus-section">
+    <div class="focus-copy section-pad">
+      <span class="kicker">LESS DISTRACTIONS. MORE LIFE.</span>
+      <h2>Get more done.<br>Spend less time on your phone.</h2>
+      <p class="subcopy left">Zenn helps you stay focused by handling the busy work, so you can spend more time on what actually matters.</p>
+      <div class="benefits">
+        <div><strong>Save hours</strong><span>every week</span></div>
+        <div><strong>Stay focused</strong><span>on what matters</span></div>
+        <div><strong>A calmer,</strong><span>more organized life</span></div>
+      </div>
+    </div>
+    <div class="focus-image"><img src="assets/focus-woman.webp" alt="Focused person wearing Zenn Band"></div>
   </section>
 
-  <section class="cta section-light" id="early-access">
-    <div class="shell split cta-split"><div><span class="eyebrow">BE PART OF WHAT'S NEXT</span><h2>Join the early access.</h2><p class="lead">Zenn and the Zenn Band are coming soon. Join the waitlist to be the first to try it and get exclusive updates.</p><form id="waitlist-form" novalidate><div class="email-row"><input id="email" name="email" type="email" placeholder="Your email address" required><button class="pill dark" type="submit">Join Waitlist <b>→</b></button></div><p id="form-status" class="form-status" role="status"></p></form><small>No spam. Just important updates.</small></div><div class="cta-product"><img src="assets/zenn-band.png" alt="Zenn Band product"></div></div>
+  <section class="waitlist-section" id="early-access">
+    <div class="waitlist-copy">
+      <span class="kicker">BE PART OF WHAT'S NEXT</span>
+      <h2>Join the early access.</h2>
+      <p>Zenn and the Zenn Band are coming soon. Join the waitlist to be the first to try it and get exclusive updates.</p>
+      <form id="waitlist-form" novalidate>
+        <div class="email-row">
+          <input id="email" name="email" type="email" autocomplete="email" placeholder="Your email address" required>
+          <button class="pill pill-dark" type="submit">Join Waitlist <b>→</b></button>
+        </div>
+        <p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+      </form>
+      <small>No spam. Just important updates.</small>
+    </div>
+    <div class="waitlist-product"><img src="assets/zenn-band.png" alt="Zenn Band"></div>
   </section>
 
-  <section class="thank-you" id="thank-you" hidden><div class="shell narrow center"><span class="eyebrow">YOU'RE ON THE LIST</span><h2>Thanks for joining.</h2><p>Tell us what you would most like Zenn to do for you.</p><form id="interest-form"><textarea id="delegate" maxlength="500" placeholder="What would you like to hand off to Zenn?"></textarea><button class="pill dark" type="submit">Share my idea</button><p id="interest-status" class="form-status"></p></form></div></section>
+  <section class="thank-you" id="thank-you" hidden>
+    <div class="section-inner centered">
+      <span class="kicker">YOU'RE ON THE LIST</span>
+      <h2>Thanks for joining.</h2>
+      <p>Tell us what you'd most like Zenn to do for you.</p>
+      <form id="interest-form">
+        <textarea id="delegate" maxlength="500" placeholder="What would you like to hand off to Zenn?"></textarea>
+        <button class="pill pill-dark" type="submit">Share my idea</button>
+        <p id="interest-status" class="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
 </main>
 
-<footer><div class="shell footer-grid"><div><a class="brand footer-brand" href="#top">ZENN</a><p>A personal AI that learns you, gets things done and helps you live a more focused, intentional life.</p></div><div><b>Product</b><a href="#product">Zenn</a><a href="#band">Zenn Band</a><a href="#features">Features</a><a href="#early-access">Integrations</a></div><div><b>Company</b><a href="#about">About</a><a href="mailto:contact.zennapp@gmail.com">Contact</a></div><div><b>Join the journey</b><p>Get early access and product updates.</p><a class="footer-email" href="#early-access">Your email <span>→</span></a></div></div><div class="shell footer-bottom"><small>© <span id="year"></span> Zenn. All rights reserved.</small><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div></footer>
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand-col">
+      <a class="wordmark" href="#top">ZENN</a>
+      <p>A personal AI that learns you, gets things done and helps you live a more focused, intentional life.</p>
+      <div class="socials"><span>𝕏</span><span>◎</span><span>in</span><span>▶</span></div>
+    </div>
+    <div><strong>Product</strong><a href="#product">Zenn</a><a href="#band">Zenn Band</a><a href="#features">Features</a><a href="#early-access">Integrations</a></div>
+    <div><strong>Company</strong><a href="#about">About</a><a href="#">Careers</a><a href="#">Blog</a><a href="mailto:contact.zennapp@gmail.com">Contact</a></div>
+    <div class="footer-join"><strong>Join the journey</strong><p>Get early access and product updates.</p><a class="footer-input" href="#early-access"><span>Your email</span><b>→</b></a></div>
+  </div>
+  <div class="footer-bottom"><small>© <span id="year"></span> Zenn. All rights reserved.</small><div><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Cookies</a></div></div>
+</footer>
+
 <script src="script.js" defer></script>
 </body>
 </html>
