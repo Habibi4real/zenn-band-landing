@@ -618,3 +618,21 @@ footer{
 @media(min-width:981px){.band-photo{margin-left:-70px}.band-copy{padding-right:45px}.band-photo img{width:calc(100% + 70px);max-width:none}}
 @media(max-width:980px){.feature-four{margin-top:50px;grid-template-columns:repeat(2,1fr);row-gap:35px}.feature-four article:nth-child(2){border-right:0}.band{grid-template-columns:1fr}.band-copy{background:#fff}.band-photo{height:460px;margin-left:0}}
 @media(max-width:560px){.meet{padding:65px 20px}.meet h2{font-size:clamp(32px,8vw,43px)}.meet .intro-copy{font-size:13px}.feature-four{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 0}.feature-four article{padding:0 10px}.feature-four h3{font-size:13px}.feature-four p{font-size:11px}.band-photo{height:375px}}
+
+/* Final Zenn Band reference-matched editorial layout */
+.band{display:grid;grid-template-columns:1fr 1fr;min-height:650px;background:#fff;overflow:hidden}
+.band-copy{z-index:2;display:flex;flex-direction:column;justify-content:center;padding:64px 36px 62px 42px;background:#fff}
+.band-copy h2{margin:16px 0;font-size:clamp(44px,4vw,62px);line-height:1.03;font-weight:500;letter-spacing:-.055em}
+.band-copy>p{font-size:15px;line-height:1.6;max-width:460px}
+.band-mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:50px 0 36px}
+.band-mini>div{min-width:0;padding:0 14px 0 0;margin-right:14px;border-right:1px solid #e6e6e6}
+.band-mini>div:last-child{margin-right:0;padding-right:0;border:0}
+.band-mini .mini-ico{height:30px;display:flex;align-items:center;justify-content:flex-start;margin-bottom:10px}
+.band-mini .mini-ico svg{width:25px;height:25px;stroke:#111;stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.band-mini strong{display:block;font-size:12px;font-weight:600;margin:0 0 8px}
+.band-mini small{display:block;font-size:10px;line-height:1.5}
+.band-cta{align-self:flex-start;min-height:44px;padding:12px 24px;font-size:12px}
+.band-photo{margin:0;overflow:hidden;position:relative;background:#ece8e5}
+.band-photo img{display:block;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center}
+@media(max-width:980px){.band{grid-template-columns:1fr}.band-copy{padding:56px 24px 40px}.band-photo{height:440px}.band-mini{margin-top:38px}}
+@media(max-width:560px){.band-copy h2{font-size:clamp(40px,11vw,52px)}.band-copy>p{font-size:14px}.band-mini{grid-template-columns:repeat(3,minmax(0,1fr));gap:0}.band-mini>div{padding-right:8px;margin-right:8px}.band-mini strong{font-size:11px}.band-mini small{font-size:9px}.band-photo{height:360px}}
