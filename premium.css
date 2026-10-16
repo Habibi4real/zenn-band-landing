@@ -595,3 +595,26 @@ footer{
 /* Smaller top-right waitlist CTA only */
 .site-header .nav-cta{min-height:30px;padding:7px 12px;font-size:10px;line-height:1;border-radius:999px}
 @media(max-width:980px){.site-header .nav-cta{min-height:30px;padding:7px 11px;font-size:10px}}
+
+/* Match the reference: centered introductory section with four fine line icons */
+.meet{padding:78px 38px 87px}
+.meet .center-block{max-width:700px}
+.meet .kicker{font-size:11px;letter-spacing:.14em}
+.meet h2{font-size:clamp(35px,3.5vw,51px);font-weight:500;line-height:1.08;letter-spacing:-.045em;margin-top:14px}
+.meet .intro-copy{max-width:620px;margin:20px auto 0;font-size:14px;line-height:1.65}
+.feature-four{max-width:1110px;margin:72px auto 0;grid-template-columns:repeat(4,minmax(0,1fr))}
+.feature-four article{padding:0 23px;border-right:1px solid #e8e8e8}
+.feature-four .ico{height:33px;display:flex;align-items:center;justify-content:center;color:#111}
+.feature-four .ico svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.feature-four h3{font-size:15px;font-weight:600;margin:16px 0 9px}
+.feature-four p{font-size:12px;line-height:1.5;color:#777}
+/* Match the seamless editorial wrist shot in the Zenn Band reference */
+.band{grid-template-columns:1fr 1fr;min-height:650px;position:relative;overflow:hidden}
+.band-copy{position:relative;z-index:2;padding:90px 36px 76px 42px;background:linear-gradient(90deg,#fff 72%,rgba(255,255,255,.75) 100%)}
+.band-photo{position:relative;overflow:hidden;background:#eeecea}
+.band-photo img{width:100%;height:100%;object-fit:cover;object-position:55% center}
+.band-copy h2{font-size:clamp(44px,4vw,62px)}
+.band-mini{margin:48px 0 36px}
+@media(min-width:981px){.band-photo{margin-left:-70px}.band-copy{padding-right:45px}.band-photo img{width:calc(100% + 70px);max-width:none}}
+@media(max-width:980px){.feature-four{margin-top:50px;grid-template-columns:repeat(2,1fr);row-gap:35px}.feature-four article:nth-child(2){border-right:0}.band{grid-template-columns:1fr}.band-copy{background:#fff}.band-photo{height:460px;margin-left:0}}
+@media(max-width:560px){.meet{padding:65px 20px}.meet h2{font-size:clamp(32px,8vw,43px)}.meet .intro-copy{font-size:13px}.feature-four{grid-template-columns:repeat(2,minmax(0,1fr));gap:30px 0}.feature-four article{padding:0 10px}.feature-four h3{font-size:13px}.feature-four p{font-size:11px}.band-photo{height:375px}}
