@@ -1,6 +1,9 @@
 reference-*.png
 review-*.png
 review-layout.cjs
+publish-github.cjs
+verify-*.cjs
+assets/zenn-band-outdoor.png
 desktop-*.png
 mobile-*.png
 .chrome-temp/
