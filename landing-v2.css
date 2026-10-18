@@ -515,3 +515,41 @@ footer.tile{min-height:310px;padding:57px clamp(34px,6vw,110px) 28px}
   .waitlist-panel{height:auto;min-height:300px;padding:55px 22px}
   .waitlist-content h2{font-size:clamp(36px,9vw,48px)}
 }
+
+/* Final alignment for the hero, use cases and connected apps. */
+.avatars span{position:relative;z-index:2;margin-left:-10px;text-shadow:0 1px 5px #000}
+.action-grid .action-plane{display:block;color:#fff;font-family:"Segoe UI Symbol",Arial,sans-serif;font-size:39px;font-weight:700;line-height:35px;height:35px}
+.busy-card-copy ul{list-style:none;display:grid;gap:8px;margin:16px 0 0;padding:0}
+.busy-card-copy li{position:relative;padding-left:20px;font-size:15px;font-weight:500;line-height:1.2}
+.busy-card-copy li::before{content:"✓";position:absolute;left:0;top:-1px;font-weight:700}
+.busy-card::after{background:linear-gradient(180deg,transparent 30%,rgba(0,0,0,.15) 47%,rgba(0,0,0,.83) 100%)}
+.app-icons{display:flex;flex-wrap:nowrap;gap:8px;width:max-content;max-width:none}
+.app-icons span{flex:none;width:46px;height:46px;border-radius:11px}
+.app-icons img{width:27px;height:27px}
+.app-icons span[aria-label="Uber"] img,.app-icons span[aria-label="Notion"] img{width:29px;height:29px}
+.app-icons .app-more{background:#303236;color:#fff;font-size:25px;font-weight:400}
+.app-phone-image{position:absolute;z-index:1;right:clamp(40px,8vw,150px);bottom:-130px;width:clamp(300px,29vw,430px);height:auto;max-width:none;clip-path:inset(5% 10% 5% 10% round 19% / 9%)}
+
+@media(max-width:900px){
+  .app-icons{gap:5px}
+  .app-icons span{width:39px;height:39px;border-radius:9px}
+  .app-icons img{width:24px;height:24px}
+  .app-icons span[aria-label="Uber"] img,.app-icons span[aria-label="Notion"] img{width:26px;height:26px}
+  .app-phone-image{right:0;bottom:-230px;width:300px}
+}
+@media(max-width:600px){
+  .app-icons{gap:4px}
+  .app-icons span{width:34px;height:34px;border-radius:8px}
+  .app-icons img{width:21px;height:21px}
+  .app-icons span[aria-label="Uber"] img,.app-icons span[aria-label="Notion"] img{width:23px;height:23px}
+  .app-icons .app-more{font-size:21px}
+  .app-phone-image{right:3%;bottom:-300px;width:315px}
+}
+@media(max-width:360px){
+  .app-icons{gap:3px}
+  .app-icons span{width:28px;height:28px;border-radius:7px}
+  .app-icons img{width:18px;height:18px}
+  .app-icons span[aria-label="Uber"] img,.app-icons span[aria-label="Notion"] img{width:20px;height:20px}
+  .app-icons .app-more{font-size:18px}
+  .app-phone-image{right:0;width:290px}
+}
