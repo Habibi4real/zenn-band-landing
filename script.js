@@ -13,6 +13,24 @@ nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', 'Open menu');
 }));
 
+const busyCards = document.getElementById('busy-cards');
+const busyPrevious = document.querySelector('.busy-arrow-prev');
+const busyNext = document.querySelector('.busy-arrow-next');
+const busyStep = () => {
+  const first = busyCards.querySelector('.busy-card');
+  const gap = parseFloat(getComputedStyle(busyCards).gap) || 0;
+  return innerWidth > 760 ? busyCards.clientWidth + gap : first.getBoundingClientRect().width + gap;
+};
+const updateBusyArrows = () => {
+  busyPrevious.disabled = busyCards.scrollLeft <= 2;
+  busyNext.disabled = busyCards.scrollLeft >= busyCards.scrollWidth - busyCards.clientWidth - 2;
+};
+busyPrevious.addEventListener('click', () => busyCards.scrollBy({ left: -busyStep(), behavior: 'smooth' }));
+busyNext.addEventListener('click', () => busyCards.scrollBy({ left: busyStep(), behavior: 'smooth' }));
+busyCards.addEventListener('scroll', updateBusyArrows, { passive: true });
+window.addEventListener('resize', updateBusyArrows);
+updateBusyArrows();
+
 const form = document.getElementById('waitlist-form');
 const status = document.getElementById('form-status');
 const submit = form.querySelector('button[type="submit"]');

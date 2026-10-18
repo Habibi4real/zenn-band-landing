@@ -553,3 +553,57 @@ footer.tile{min-height:310px;padding:57px clamp(34px,6vw,110px) 28px}
   .app-icons .app-more{font-size:18px}
   .app-phone-image{right:0;width:290px}
 }
+
+/* Final interaction and scale refinements. */
+.avatars span{display:flex;align-items:center;justify-content:center;width:20px;height:36px;margin-left:-9px;color:transparent;font-size:0;line-height:1;filter:drop-shadow(0 1px 2px #111b)}
+.avatars span::before{content:"";display:block;width:20px;height:20px;background:linear-gradient(#fff,#fff) center/18px 2.5px no-repeat,linear-gradient(#fff,#fff) center/2.5px 18px no-repeat;border-radius:2px}
+.band-cta{justify-content:center;min-width:165px;text-align:center}
+.band-points>div{position:relative;z-index:0;border-radius:11px;transform-origin:center;transition:transform .3s ease,background-color .3s ease,box-shadow .3s ease}
+@media(hover:hover){.band-points>div:hover{z-index:1;transform:scale(1.055);background:#ffffffb8;box-shadow:0 12px 28px #11111115}}
+
+.busy-panel{overflow:hidden;min-height:0;padding-top:82px;padding-bottom:92px}
+.busy-carousel{position:relative;max-width:1460px;margin:0 auto}
+.busy-cards{display:flex;gap:18px;max-width:none;margin:0;overflow-x:auto;overflow-y:hidden;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none;padding:0 0 10px}
+.busy-cards::-webkit-scrollbar{display:none}
+.busy-card{flex:0 0 calc((100% - 36px)/3);height:460px;min-height:0;scroll-snap-align:start}
+.busy-card-copy p{max-width:390px;margin-top:17px;font-size:clamp(19px,1.55vw,25px);font-weight:500;line-height:1.33;letter-spacing:-.025em}
+.busy-arrow{position:absolute;z-index:3;top:50%;display:grid;place-items:center;width:52px;height:52px;border:0;border-radius:50%;background:#fff;color:#161616;box-shadow:0 8px 30px #0003;font-size:29px;line-height:1;transform:translateY(-50%);transition:transform .2s ease,opacity .2s ease}
+.busy-arrow:hover:not(:disabled){transform:translateY(-50%) scale(1.08)}
+.busy-arrow-prev{left:14px}.busy-arrow-next{right:14px}
+.busy-arrow:disabled{opacity:0;pointer-events:none}
+
+.app-phone-image{right:4%;bottom:-390px;width:clamp(470px,42vw,600px)}
+.waitlist-panel{min-height:430px;padding:72px 24px;background:radial-gradient(circle at 50% 10%,#fff 0%,#f7f7f6 72%)}
+.waitlist-content{width:min(100%,760px)}
+.waitlist-content h2{font-size:clamp(52px,6vw,82px);letter-spacing:-.07em;line-height:1.04}
+.waitlist-content form{max-width:650px;margin-top:40px}
+.waitlist-content .email-row{min-height:62px}
+.waitlist-content .email-row input{font-size:16px;padding-inline:24px}
+.waitlist-content .email-row button{min-width:190px}
+
+@media(max-width:900px){
+  .busy-panel{padding:70px 28px 78px}
+  .busy-card{height:420px}
+  .busy-card-copy p{font-size:20px}
+  .app-phone-image{right:0;bottom:-230px;width:360px}
+}
+@media(min-width:901px) and (max-width:1100px){.app-phone-image{right:0;bottom:-240px;width:470px}}
+@media(max-width:760px){
+  .busy-panel{padding:66px 0 75px}
+  .busy-carousel{width:100%}
+  .busy-cards{gap:14px;padding:0 22px 10px;scroll-padding-inline:22px}
+  .busy-card{flex:0 0 min(76vw,360px);height:440px}
+  .busy-arrow-prev{left:6px}.busy-arrow-next{right:6px}
+}
+@media(max-width:600px){
+  .band-points>div{border-radius:8px}
+  .busy-card{flex-basis:84vw;height:430px}
+  .busy-card-copy p{font-size:21px}
+  .app-phone-image{right:0;bottom:-300px;width:350px}
+  .waitlist-panel{min-height:360px;padding:70px 22px}
+  .waitlist-content h2{font-size:clamp(43px,11vw,60px)}
+  .waitlist-content form{margin-top:30px}
+  .waitlist-content .email-row{min-height:0}
+}
+@media(max-width:360px){.app-phone-image{right:-4px;bottom:-280px;width:320px}}
+@media(prefers-reduced-motion:reduce){.band-points>div,.busy-cards,.busy-arrow{transition:none;scroll-behavior:auto}}
