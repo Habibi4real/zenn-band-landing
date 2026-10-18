@@ -286,33 +286,69 @@ footer.tile{min-height:310px;padding:57px clamp(34px,6vw,110px) 28px}
   .hero-actions .button{gap:10px}
 }
 
-/* Give the main story panels the same visual height as the hero. */
+/* Keep the story panels generous without forcing unrelated content into one height. */
 @media(min-width:721px){
-  .meet-panel,.actions-panel{min-height:clamp(680px,54vw,810px)}
-  .band-panel,.apps-panel,.life-panel,.waitlist-panel{height:clamp(680px,54vw,810px);min-height:clamp(680px,54vw,810px)}
+  .meet-panel{min-height:clamp(620px,47vw,720px)}
+  .band-panel{height:clamp(650px,50vw,750px);min-height:clamp(650px,50vw,750px)}
+  .actions-panel{min-height:clamp(640px,49vw,730px)}
+  .apps-panel{height:clamp(620px,49vw,730px);min-height:clamp(620px,49vw,730px)}
+  .life-panel{height:clamp(650px,51vw,760px);min-height:clamp(650px,51vw,760px)}
+  .waitlist-panel{height:clamp(580px,45vw,680px);min-height:clamp(580px,45vw,680px)}
   .meet-panel{display:flex;flex-direction:column;justify-content:center}
   .actions-panel{display:grid;place-items:center}
   .actions-inner{width:100%}
   .apps-copy,.waitlist-content{height:100%;display:flex;flex-direction:column;justify-content:center}
+  .apps-copy{align-items:flex-start}
   .life-photo{left:auto;right:0;width:55%;object-position:center 30%}
   .life-shade{background:linear-gradient(90deg,#f7f7f6 0%,#f7f7f6 35%,#f7f7f6ed 47%,#f7f7f6a6 60%,transparent 80%)}
   .life-content{max-width:850px;justify-content:center;padding-block:75px}
   .life-content h2{white-space:nowrap}
   .life-content>p{max-width:610px}
   .life-benefits{max-width:650px;margin-top:65px}
+  .waitlist-content h2{font-size:clamp(48px,4.5vw,68px)}
+  .waitlist-content>p{font-size:17px;line-height:1.5}
+  .waitlist-content form{width:100%;max-width:550px;margin-top:30px}
+  .email-row{max-width:550px}
+  .actions-panel h2{font-size:clamp(52px,4.8vw,72px)}
+  .action-grid article{min-height:165px}
+}
+@media(min-width:721px) and (max-width:1100px){
+  .band-photo{width:54%;object-position:67% center}
+  .band-shade{background:linear-gradient(90deg,#faf9f7 0%,#faf9f7 43%,#faf9f7ed 55%,transparent 88%)}
+  .band-content{width:52%;margin-left:clamp(30px,5vw,65px);padding-block:50px}
+  .band-content h2{font-size:clamp(42px,4.8vw,52px)}
+  .band-content>p{font-size:15px}
+  .band-points span{font-size:10px}
+  .apps-copy{max-width:52%;margin-left:clamp(30px,5vw,65px)}
+  .phone-mock{right:4%;width:clamp(230px,29vw,300px);bottom:-75px}
+  .life-photo{width:46%;object-position:center 22%}
+  .life-shade{background:linear-gradient(90deg,#f7f7f6 0%,#f7f7f6 43%,#f7f7f6ec 55%,transparent 88%)}
+  .life-content{max-width:53%;margin-left:clamp(30px,5vw,65px);padding-block:55px}
+  .life-content h2{white-space:normal;font-size:clamp(38px,4.4vw,50px)}
+  .life-content>p{font-size:15px}
+  .life-benefits{margin-top:45px}
+  .life-benefits span{font-size:11px;padding-inline:10px}
+  .product-photo{left:auto;right:0;width:55%;object-position:center}
+  .waitlist-shade{background:linear-gradient(90deg,#f8f8f7 0%,#f8f8f7 43%,#f8f8f7ed 55%,transparent 88%)}
+  .waitlist-content{max-width:52%;margin-left:clamp(30px,5vw,65px)}
 }
 @media(max-width:720px){
-  .meet-panel,.actions-panel{min-height:800px}
-  .band-panel,.apps-panel,.life-panel,.waitlist-panel{height:800px;min-height:800px}
+  .meet-panel,.actions-panel{min-height:0}
+  .band-panel{height:780px;min-height:780px}
+  .apps-panel{height:740px;min-height:740px}
+  .life-panel{height:760px;min-height:760px}
+  .waitlist-panel{height:710px;min-height:710px}
   .life-photo{width:100%;height:49%;top:auto;left:0;right:auto;object-position:65% 35%}
   .life-shade{background:linear-gradient(180deg,#f7f7f6 0%,#f7f7f6 39%,#f7f7f6e0 51%,transparent 74%)}
   .life-content{height:auto;max-width:none;padding:70px 24px}
   .life-benefits{margin-top:45px}
-  .phone-mock{bottom:-110px}
+  .phone-mock{bottom:-305px}
 }
 @media(max-width:430px){
-  .meet-panel,.actions-panel{min-height:760px}
-  .band-panel,.apps-panel,.life-panel,.waitlist-panel{height:760px;min-height:760px}
+  .band-panel{height:750px;min-height:750px}
+  .apps-panel{height:720px;min-height:720px}
+  .life-panel{height:730px;min-height:730px}
+  .waitlist-panel{height:680px;min-height:680px}
   .meet-panel{padding-top:65px;padding-bottom:65px}
   .actions-inner{padding-top:40px;padding-bottom:40px}
 }
