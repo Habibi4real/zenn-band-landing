@@ -660,3 +660,11 @@ footer.tile{min-height:310px;padding:57px clamp(34px,6vw,110px) 28px}
 }
 @media(max-width:360px){.app-phone-image{bottom:-430px}}
 @media(max-width:760px){.busy-carousel::before{content:"";position:absolute;z-index:2;left:0;top:0;bottom:0;width:22px;background:#f8f8f7;pointer-events:none}}
+
+/* Keep the supplied phone screenshot at its native resolution and crop only its white canvas. */
+.app-phone-image{right:-100px;bottom:-350px;width:620px;clip-path:inset(5.8% 19% 4.8% 14.5% round 0)}
+@media(max-width:1100px){.app-phone-image{right:-86px;bottom:-325px;width:540px}}
+@media(max-width:900px){.app-phone-image{right:-70px;bottom:-440px;width:480px}}
+@media(min-width:601px) and (max-width:900px){.apps-panel{height:700px;min-height:700px}.app-phone-image{bottom:-360px}}
+@media(max-width:600px){.app-phone-image{left:50%;right:auto;bottom:-400px;width:min(500px,calc(100vw + 130px));transform:translateX(-47%);clip-path:inset(5.8% 19% 4.8% 14.5% round 0)}}
+@media(max-width:360px){.app-phone-image{bottom:-385px}}
