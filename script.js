@@ -13,6 +13,74 @@ nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', 'Open menu');
 }));
 
+const heroJoin = document.querySelector('.hero-actions a[href="#early-access"]');
+const floatingJoin = document.createElement('a');
+floatingJoin.className = 'mobile-floating-cta';
+floatingJoin.href = heroJoin.href;
+floatingJoin.textContent = 'Join Waitlist';
+floatingJoin.hidden = true;
+document.body.append(floatingJoin);
+const mobileViewport = matchMedia('(max-width: 720px)');
+let floatingActive = false;
+let floatingEndTimer;
+const placeFloatingJoin = rect => {
+  floatingJoin.style.left = `${rect.left}px`;
+  floatingJoin.style.top = `${rect.top}px`;
+  floatingJoin.style.width = `${rect.width}px`;
+  floatingJoin.style.height = `${rect.height}px`;
+};
+const floatingCorner = () => ({ left: innerWidth - 142, top: 12, width: 124, height: 42 });
+const updateFloatingJoin = () => {
+  if (!mobileViewport.matches) {
+    clearTimeout(floatingEndTimer);
+    floatingActive = false;
+    floatingJoin.hidden = true;
+    floatingJoin.classList.remove('at-corner');
+    heroJoin.style.visibility = '';
+    return;
+  }
+  if (scrollY > 160) {
+    if (floatingActive) return;
+    clearTimeout(floatingEndTimer);
+    floatingActive = true;
+    if (floatingJoin.hidden) {
+      const source = heroJoin.getBoundingClientRect();
+      floatingJoin.hidden = false;
+      floatingJoin.style.transition = 'none';
+      placeFloatingJoin(source.bottom > 0 ? source : floatingCorner());
+      floatingJoin.getBoundingClientRect();
+      floatingJoin.style.transition = '';
+    }
+    heroJoin.style.visibility = 'hidden';
+    requestAnimationFrame(() => {
+      if (!floatingActive) return;
+      floatingJoin.classList.add('at-corner');
+      placeFloatingJoin(floatingCorner());
+    });
+  } else if (floatingActive) {
+    floatingActive = false;
+    clearTimeout(floatingEndTimer);
+    floatingJoin.classList.remove('at-corner');
+    placeFloatingJoin(heroJoin.getBoundingClientRect());
+    floatingEndTimer = setTimeout(() => {
+      if (floatingActive) return;
+      floatingJoin.hidden = true;
+      heroJoin.style.visibility = '';
+    }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600);
+  }
+};
+window.addEventListener('scroll', updateFloatingJoin, { passive: true });
+window.addEventListener('resize', () => {
+  if (floatingActive && mobileViewport.matches) {
+    floatingJoin.style.transition = 'none';
+    placeFloatingJoin(floatingCorner());
+    floatingJoin.getBoundingClientRect();
+    floatingJoin.style.transition = '';
+  }
+  updateFloatingJoin();
+});
+updateFloatingJoin();
+
 const busyCards = document.getElementById('busy-cards');
 const busyCarousel = document.querySelector('.busy-carousel');
 const busyPrevious = document.querySelector('.busy-arrow-prev');
