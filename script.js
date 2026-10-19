@@ -80,7 +80,6 @@ const status = document.getElementById('form-status');
 const submit = form.querySelector('button[type="submit"]');
 const thankYou = document.getElementById('thank-you');
 thankYou.querySelector('.dialog-close').addEventListener('click', () => thankYou.close());
-thankYou.querySelector('.dialog-later').addEventListener('click', () => thankYou.close());
 thankYou.addEventListener('close', () => document.body.classList.remove('modal-open'));
 let signupToken = null;
 async function postWaitlist(payload) {

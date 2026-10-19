@@ -714,8 +714,8 @@ body.modal-open{overflow:hidden}
 .thank-you::backdrop{background:#080a0caa;backdrop-filter:blur(8px)}
 .thank-you .section-wrap{position:relative;max-width:none;padding:clamp(30px,4vw,50px)}
 .thank-you .eyebrow{font-size:11px;letter-spacing:.16em;font-weight:700}
-.thank-you h2{margin:13px 0 12px;font-size:clamp(38px,4.4vw,58px);line-height:1.04;letter-spacing:-.055em}
-.thank-you p{font-size:16px;line-height:1.5;color:#55595b}
+.thank-you h2{margin:0 0 14px;font-size:clamp(38px,4.4vw,58px);line-height:1.04;letter-spacing:-.055em;text-align:center}
+.thank-you> .section-wrap > p{max-width:460px;margin:0 auto;font-size:16px;line-height:1.5;color:#55595b;text-align:center}
 .thank-you form{margin-top:30px}
 .thank-you label{font-size:14px;font-weight:600;margin-bottom:11px}
 .thank-you textarea{min-height:110px;padding:16px;border:1px solid #d6d6d4;border-radius:16px;background:#fff;font:inherit;font-size:15px;line-height:1.45;outline:none}
@@ -724,7 +724,39 @@ body.modal-open{overflow:hidden}
 .dialog-close:hover{background:#dededb}
 .dialog-actions{display:flex;align-items:center;gap:22px;margin-top:17px}
 .thank-you .dialog-actions .button{margin:0}
-.dialog-later{padding:11px 0;border:0;background:none;color:#555;font:inherit;font-size:14px;cursor:pointer}
-.dialog-later:hover{text-decoration:underline;color:#111}
 .thank-you .form-status{margin:12px 0 0}
 @media(max-width:600px){.thank-you .section-wrap{padding:42px 24px 28px}.thank-you h2{padding-right:15px}.dialog-close{top:16px;right:16px}.dialog-actions{gap:15px}.thank-you .dialog-actions .button{padding-inline:19px}}
+
+/* Give the narrow layout readable copy and room for the phone demonstration. */
+@media(max-width:760px){
+  .band-points{display:grid;grid-template-columns:1fr;gap:9px;max-width:560px}
+  .band-points>div,.band-points>div:first-child,.band-points>div:last-child{display:grid;grid-template-columns:30px minmax(0,1fr);grid-template-rows:auto auto;column-gap:14px;padding:12px 14px;border:1px solid #dedfdb;border-radius:14px;background:#ffffffad}
+  .band-points svg{grid-row:1/3;grid-column:1;width:25px;height:25px;margin:1px 0 0}
+  .band-points strong{grid-column:2;font-size:14px;line-height:1.25}
+  .band-points span{grid-column:2;font-size:13px;line-height:1.4;margin-top:3px}
+  .app-icons{width:100%;max-width:100%;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#62666a transparent;padding:0 1px 10px;scroll-snap-type:x proximity}
+  .app-icons span{scroll-snap-align:start}
+  .footer-top nav a,.footer-join p,.footer-email{font-size:13px;line-height:1.45}
+  .footer-brand p{font-size:13px;line-height:1.45}
+  .footer-top strong{font-size:14px}
+  .footer-bottom{font-size:12px;line-height:1.4}
+  .footer-bottom small{font-size:12px}
+}
+@media(max-width:600px){
+  .apps-panel{height:910px;min-height:910px}
+  .apps-copy{padding:66px 24px 0}
+  .app-icons{gap:8px;margin:30px 0 22px}
+  .app-icons span{width:43px;height:43px;border-radius:10px}
+  .app-icons img{width:26px;height:26px}
+  .app-phone-image{top:445px;bottom:auto;left:50%;right:auto;width:min(500px,calc(100vw + 130px));transform:translateX(-47%)}
+  .action-grid span{font-size:13px;line-height:1.3}
+  .action-grid article{min-height:142px;padding:16px 10px}
+  .footer-bottom{gap:14px;flex-wrap:wrap}
+  .thank-you h2{padding-right:0;font-size:clamp(33px,9vw,46px)}
+  .thank-you .section-wrap{padding:54px 22px 30px}
+  .thank-you .dialog-actions .button{width:100%;justify-content:center}
+}
+@media(max-width:360px){
+  .app-phone-image{top:455px;bottom:auto}
+  .action-grid span{font-size:12px}
+}

@@ -4,6 +4,9 @@
   "description": "Zenn Band concept and waitlist website with no checkout.",
   "private": true,
   "type": "commonjs",
+  "scripts": {
+    "export:waitlist": "node export-waitlist.cjs"
+  },
   "dependencies": {
     "@vercel/blob": "^2.3.0"
   }

@@ -13,3 +13,5 @@ mobile-*.png
 .github-upload.json
 .env.local
 node_modules/
+exports/
+export-waitlist.cjs
