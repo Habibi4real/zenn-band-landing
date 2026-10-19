@@ -697,3 +697,34 @@ footer.tile{min-height:310px;padding:57px clamp(34px,6vw,110px) 28px}
   .life-benefits span{padding:12px 15px;border:0;font-size:15px}
   .life-benefits strong{display:block;margin:0 0 3px;font-size:17px}
 }
+
+/* Bring the phone into the composition instead of leaving it at the edge. */
+.apps-panel{isolation:isolate;background:radial-gradient(circle at 77% 48%,#282a2e 0%,#141517 44%,#090a0b 79%)}
+.apps-panel::before{content:"";position:absolute;z-index:0;right:5%;top:4%;width:min(43vw,660px);height:92%;background:radial-gradient(ellipse at center,#4b4d5150 0%,#2d30332a 43%,transparent 72%);filter:blur(18px);pointer-events:none}
+.app-phone-image{top:90px;right:clamp(15px,4vw,80px);bottom:auto;width:clamp(520px,41vw,610px)}
+@media(min-width:901px) and (max-width:1100px){.app-phone-image{top:90px;right:30px;width:430px}}
+@media(max-width:900px){.app-phone-image{top:auto;right:-70px;bottom:-360px;width:480px}}
+@media(max-width:600px){.apps-panel::before{left:4%;right:4%;top:48%;width:92%;height:50%}.app-phone-image{left:50%;right:auto;bottom:-400px;width:min(500px,calc(100vw + 130px));transform:translateX(-47%)}}
+@media(max-width:360px){.app-phone-image{bottom:-385px}}
+
+/* The signup follow-up stays on the current screen. */
+body.modal-open{overflow:hidden}
+.thank-you:not([open]){display:none}
+.thank-you{position:fixed;inset:0;width:min(620px,calc(100vw - 32px));max-width:none;max-height:calc(100dvh - 32px);margin:auto;padding:0;overflow:auto;border:1px solid #e5e5e3;border-radius:26px;background:#f7f7f6;color:#111;box-shadow:0 30px 100px #0005}
+.thank-you::backdrop{background:#080a0caa;backdrop-filter:blur(8px)}
+.thank-you .section-wrap{position:relative;max-width:none;padding:clamp(30px,4vw,50px)}
+.thank-you .eyebrow{font-size:11px;letter-spacing:.16em;font-weight:700}
+.thank-you h2{margin:13px 0 12px;font-size:clamp(38px,4.4vw,58px);line-height:1.04;letter-spacing:-.055em}
+.thank-you p{font-size:16px;line-height:1.5;color:#55595b}
+.thank-you form{margin-top:30px}
+.thank-you label{font-size:14px;font-weight:600;margin-bottom:11px}
+.thank-you textarea{min-height:110px;padding:16px;border:1px solid #d6d6d4;border-radius:16px;background:#fff;font:inherit;font-size:15px;line-height:1.45;outline:none}
+.thank-you textarea:focus{border-color:#555;box-shadow:0 0 0 3px #1112}
+.dialog-close{position:absolute;top:24px;right:24px;display:grid;place-items:center;width:38px;height:38px;border:0;border-radius:50%;background:#e8e8e6;color:#222;font-size:27px;line-height:1;cursor:pointer}
+.dialog-close:hover{background:#dededb}
+.dialog-actions{display:flex;align-items:center;gap:22px;margin-top:17px}
+.thank-you .dialog-actions .button{margin:0}
+.dialog-later{padding:11px 0;border:0;background:none;color:#555;font:inherit;font-size:14px;cursor:pointer}
+.dialog-later:hover{text-decoration:underline;color:#111}
+.thank-you .form-status{margin:12px 0 0}
+@media(max-width:600px){.thank-you .section-wrap{padding:42px 24px 28px}.thank-you h2{padding-right:15px}.dialog-close{top:16px;right:16px}.dialog-actions{gap:15px}.thank-you .dialog-actions .button{padding-inline:19px}}

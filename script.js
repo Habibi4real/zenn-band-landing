@@ -78,6 +78,10 @@ jumpBusyTo(busyIndex);
 const form = document.getElementById('waitlist-form');
 const status = document.getElementById('form-status');
 const submit = form.querySelector('button[type="submit"]');
+const thankYou = document.getElementById('thank-you');
+thankYou.querySelector('.dialog-close').addEventListener('click', () => thankYou.close());
+thankYou.querySelector('.dialog-later').addEventListener('click', () => thankYou.close());
+thankYou.addEventListener('close', () => document.body.classList.remove('modal-open'));
 let signupToken = null;
 async function postWaitlist(payload) {
   const response = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -101,8 +105,10 @@ form.addEventListener('submit', async event => {
     signupToken = body.signupToken;
     status.textContent = 'You’re on the list.';
     status.classList.add('success');
-    document.getElementById('thank-you').hidden = false;
-    document.getElementById('thank-you').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    document.getElementById('interest-form').reset();
+    document.getElementById('interest-status').textContent = '';
+    document.body.classList.add('modal-open');
+    thankYou.showModal();
     form.reset();
   } catch (error) {
     status.textContent = error.message;
