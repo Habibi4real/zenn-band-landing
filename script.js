@@ -21,8 +21,11 @@ floatingJoin.textContent = 'Join Waitlist';
 floatingJoin.hidden = true;
 document.body.append(floatingJoin);
 const mobileViewport = matchMedia('(max-width: 720px)');
+const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 let floatingActive = false;
-let floatingEndTimer;
+let floatingFrame = 0;
+let floatingRect;
+let floatingFrameTime = 0;
 const placeFloatingJoin = rect => {
   floatingJoin.style.left = `${rect.left}px`;
   floatingJoin.style.top = `${rect.top}px`;
@@ -30,53 +33,72 @@ const placeFloatingJoin = rect => {
   floatingJoin.style.height = `${rect.height}px`;
 };
 const floatingCorner = () => ({ left: innerWidth - 142, top: 12, width: 124, height: 42 });
+const heroJoinRect = () => {
+  const { left, top, width, height } = heroJoin.getBoundingClientRect();
+  return { left, top, width, height };
+};
+const updateFloatingContrast = () => {
+  const darkSection = [...document.querySelectorAll('.hero,.actions-panel,.apps-panel,footer.tile')]
+    .some(section => {
+      const rect = section.getBoundingClientRect();
+      return rect.top <= 33 && rect.bottom > 33;
+    });
+  floatingJoin.classList.toggle('over-dark', darkSection);
+};
+const animateFloatingJoin = now => {
+  floatingFrame = 0;
+  if (floatingJoin.hidden) return;
+  const target = floatingActive ? floatingCorner() : heroJoinRect();
+  const elapsed = floatingFrameTime ? Math.min(now - floatingFrameTime, 48) : 16;
+  floatingFrameTime = now;
+  const progress = reducedMotion.matches ? 1 : 1 - Math.exp(-elapsed / 110);
+  floatingRect = Object.fromEntries(Object.keys(target).map(key => [key, floatingRect[key] + (target[key] - floatingRect[key]) * progress]));
+  placeFloatingJoin(floatingRect);
+  const settled = Object.keys(target).every(key => Math.abs(target[key] - floatingRect[key]) < 1);
+  if (!floatingActive && settled) {
+    floatingJoin.hidden = true;
+    heroJoin.style.visibility = '';
+    floatingFrameTime = 0;
+    return;
+  }
+  if (!settled || !floatingActive) floatingFrame = requestAnimationFrame(animateFloatingJoin);
+};
+const startFloatingAnimation = () => {
+  if (!floatingFrame) floatingFrame = requestAnimationFrame(animateFloatingJoin);
+};
 const updateFloatingJoin = () => {
   if (!mobileViewport.matches) {
-    clearTimeout(floatingEndTimer);
+    cancelAnimationFrame(floatingFrame);
+    floatingFrame = 0;
+    floatingFrameTime = 0;
     floatingActive = false;
     floatingJoin.hidden = true;
-    floatingJoin.classList.remove('at-corner');
+    floatingJoin.classList.remove('at-corner', 'over-dark');
     heroJoin.style.visibility = '';
     return;
   }
-  if (scrollY > 160) {
-    if (floatingActive) return;
-    clearTimeout(floatingEndTimer);
+  const source = heroJoinRect();
+  const buttonBottom = source.top + source.height;
+  if (!floatingActive && buttonBottom <= 115) {
     floatingActive = true;
     if (floatingJoin.hidden) {
-      const source = heroJoin.getBoundingClientRect();
+      floatingRect = source.top + source.height > 0 ? source : floatingCorner();
       floatingJoin.hidden = false;
-      floatingJoin.style.transition = 'none';
-      placeFloatingJoin(source.bottom > 0 ? source : floatingCorner());
-      floatingJoin.getBoundingClientRect();
-      floatingJoin.style.transition = '';
+      placeFloatingJoin(floatingRect);
     }
     heroJoin.style.visibility = 'hidden';
-    requestAnimationFrame(() => {
-      if (!floatingActive) return;
-      floatingJoin.classList.add('at-corner');
-      placeFloatingJoin(floatingCorner());
-    });
-  } else if (floatingActive) {
+    floatingJoin.classList.add('at-corner');
+    startFloatingAnimation();
+  } else if (floatingActive && buttonBottom >= 145) {
     floatingActive = false;
-    clearTimeout(floatingEndTimer);
     floatingJoin.classList.remove('at-corner');
-    placeFloatingJoin(heroJoin.getBoundingClientRect());
-    floatingEndTimer = setTimeout(() => {
-      if (floatingActive) return;
-      floatingJoin.hidden = true;
-      heroJoin.style.visibility = '';
-    }, matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 600);
+    startFloatingAnimation();
   }
+  if (floatingActive) updateFloatingContrast();
+  if (!floatingJoin.hidden) startFloatingAnimation();
 };
 window.addEventListener('scroll', updateFloatingJoin, { passive: true });
 window.addEventListener('resize', () => {
-  if (floatingActive && mobileViewport.matches) {
-    floatingJoin.style.transition = 'none';
-    placeFloatingJoin(floatingCorner());
-    floatingJoin.getBoundingClientRect();
-    floatingJoin.style.transition = '';
-  }
   updateFloatingJoin();
 });
 updateFloatingJoin();
