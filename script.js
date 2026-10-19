@@ -14,22 +14,68 @@ nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
 }));
 
 const busyCards = document.getElementById('busy-cards');
+const busyCarousel = document.querySelector('.busy-carousel');
 const busyPrevious = document.querySelector('.busy-arrow-prev');
 const busyNext = document.querySelector('.busy-arrow-next');
-const busyStep = () => {
+const busyOriginals = [...busyCards.querySelectorAll('.busy-card')];
+const busyCount = busyOriginals.length;
+const cloneBusyCard = card => {
+  const clone = card.cloneNode(true);
+  clone.dataset.clone = 'true';
+  clone.setAttribute('aria-hidden', 'true');
+  clone.inert = true;
+  return clone;
+};
+busyCards.prepend(...busyOriginals.map(cloneBusyCard));
+busyCards.append(...busyOriginals.map(cloneBusyCard));
+let busyIndex = busyCount;
+let busyHovered = false;
+let busyInView = false;
+let busyLastInteraction = 0;
+let busySettleTimer;
+const busyDistance = () => {
   const first = busyCards.querySelector('.busy-card');
   const gap = parseFloat(getComputedStyle(busyCards).gap) || 0;
-  return innerWidth > 760 ? busyCards.clientWidth + gap : first.getBoundingClientRect().width + gap;
+  return first.getBoundingClientRect().width + gap;
 };
-const updateBusyArrows = () => {
-  busyPrevious.disabled = busyCards.scrollLeft <= 2;
-  busyNext.disabled = busyCards.scrollLeft >= busyCards.scrollWidth - busyCards.clientWidth - 2;
+const jumpBusyTo = index => {
+  busyCards.style.scrollBehavior = 'auto';
+  busyCards.scrollLeft = index * busyDistance();
+  requestAnimationFrame(() => { busyCards.style.scrollBehavior = ''; });
 };
-busyPrevious.addEventListener('click', () => busyCards.scrollBy({ left: -busyStep(), behavior: 'smooth' }));
-busyNext.addEventListener('click', () => busyCards.scrollBy({ left: busyStep(), behavior: 'smooth' }));
-busyCards.addEventListener('scroll', updateBusyArrows, { passive: true });
-window.addEventListener('resize', updateBusyArrows);
-updateBusyArrows();
+const settleBusy = () => {
+  busyIndex = Math.round(busyCards.scrollLeft / busyDistance());
+  if (busyIndex < busyCount || busyIndex >= busyCount * 2) {
+    busyIndex = busyCount + ((busyIndex - busyCount) % busyCount + busyCount) % busyCount;
+    jumpBusyTo(busyIndex);
+  }
+};
+const moveBusy = direction => {
+  clearTimeout(busySettleTimer);
+  busyIndex += direction * (innerWidth > 760 ? 3 : 1);
+  busyCards.scrollTo({ left: busyIndex * busyDistance(), behavior: 'smooth' });
+  busySettleTimer = setTimeout(settleBusy, 750);
+};
+busyPrevious.addEventListener('click', () => { busyLastInteraction = Date.now(); moveBusy(-1); });
+busyNext.addEventListener('click', () => { busyLastInteraction = Date.now(); moveBusy(1); });
+busyCards.addEventListener('pointerdown', () => { busyLastInteraction = Date.now(); });
+busyCarousel.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') busyHovered = true; });
+busyCarousel.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') busyHovered = false; });
+busyCards.addEventListener('scroll', () => {
+  clearTimeout(busySettleTimer);
+  busySettleTimer = setTimeout(settleBusy, 180);
+}, { passive: true });
+window.addEventListener('resize', () => {
+  busyIndex = busyCount + ((busyIndex - busyCount) % busyCount + busyCount) % busyCount;
+  jumpBusyTo(busyIndex);
+});
+new IntersectionObserver(entries => { busyInView = entries[0].isIntersecting; }, { threshold: .25 }).observe(busyCarousel);
+jumpBusyTo(busyIndex);
+setInterval(() => {
+  if (busyInView && !busyHovered && !busyCarousel.contains(document.activeElement) &&
+      !document.hidden && !matchMedia('(prefers-reduced-motion: reduce)').matches &&
+      Date.now() - busyLastInteraction > 8000) moveBusy(1);
+}, 4500);
 
 const form = document.getElementById('waitlist-form');
 const status = document.getElementById('form-status');
