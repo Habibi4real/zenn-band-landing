@@ -29,10 +29,9 @@ const cloneBusyCard = card => {
 busyCards.prepend(...busyOriginals.map(cloneBusyCard));
 busyCards.append(...busyOriginals.map(cloneBusyCard));
 let busyIndex = busyCount;
-let busyHovered = false;
 let busyInView = false;
-let busyLastInteraction = 0;
 let busySettleTimer;
+let busyAutoTimer;
 const busyDistance = () => {
   const first = busyCards.querySelector('.busy-card');
   const gap = parseFloat(getComputedStyle(busyCards).gap) || 0;
@@ -52,15 +51,18 @@ const settleBusy = () => {
 };
 const moveBusy = direction => {
   clearTimeout(busySettleTimer);
-  busyIndex += direction * (innerWidth > 760 ? 3 : 1);
+  busyIndex += direction;
   busyCards.scrollTo({ left: busyIndex * busyDistance(), behavior: 'smooth' });
   busySettleTimer = setTimeout(settleBusy, 750);
 };
-busyPrevious.addEventListener('click', () => { busyLastInteraction = Date.now(); moveBusy(-1); });
-busyNext.addEventListener('click', () => { busyLastInteraction = Date.now(); moveBusy(1); });
-busyCards.addEventListener('pointerdown', () => { busyLastInteraction = Date.now(); });
-busyCarousel.addEventListener('pointerenter', event => { if (event.pointerType === 'mouse') busyHovered = true; });
-busyCarousel.addEventListener('pointerleave', event => { if (event.pointerType === 'mouse') busyHovered = false; });
+const scheduleBusyAuto = () => {
+  clearTimeout(busyAutoTimer);
+  if (!busyInView || document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  busyAutoTimer = setTimeout(() => { moveBusy(1); scheduleBusyAuto(); }, 5000);
+};
+busyPrevious.addEventListener('click', () => { moveBusy(-1); scheduleBusyAuto(); });
+busyNext.addEventListener('click', () => { moveBusy(1); scheduleBusyAuto(); });
+busyCards.addEventListener('pointerdown', scheduleBusyAuto);
 busyCards.addEventListener('scroll', () => {
   clearTimeout(busySettleTimer);
   busySettleTimer = setTimeout(settleBusy, 180);
@@ -69,13 +71,9 @@ window.addEventListener('resize', () => {
   busyIndex = busyCount + ((busyIndex - busyCount) % busyCount + busyCount) % busyCount;
   jumpBusyTo(busyIndex);
 });
-new IntersectionObserver(entries => { busyInView = entries[0].isIntersecting; }, { threshold: .25 }).observe(busyCarousel);
+new IntersectionObserver(entries => { busyInView = entries[0].isIntersecting; scheduleBusyAuto(); }, { threshold: .25 }).observe(busyCarousel);
+document.addEventListener('visibilitychange', scheduleBusyAuto);
 jumpBusyTo(busyIndex);
-setInterval(() => {
-  if (busyInView && !busyHovered && !busyCarousel.contains(document.activeElement) &&
-      !document.hidden && !matchMedia('(prefers-reduced-motion: reduce)').matches &&
-      Date.now() - busyLastInteraction > 8000) moveBusy(1);
-}, 4500);
 
 const form = document.getElementById('waitlist-form');
 const status = document.getElementById('form-status');
