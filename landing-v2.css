@@ -885,3 +885,7 @@ body.modal-open{overflow:hidden}
 .footer-brand .social-links .instagram-dot{fill:currentColor;stroke:none}
 .integration-dialog h2{white-space:nowrap;font-size:clamp(22px,3.2vw,42px);letter-spacing:-.06em}
 @media(max-width:720px){.integration-dialog h2{font-size:clamp(20px,6.2vw,38px)}}
+.suggest-integration{-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+.suggest-integration:focus-visible{outline:2px solid currentColor}
+.integration-dialog h2:focus{outline:none}
+.integration-dialog{transform:translateY(calc(-22px - var(--integration-shift,0px)));overscroll-behavior:contain}

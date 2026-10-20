@@ -208,7 +208,25 @@ const status = document.getElementById('form-status');
 const submit = form.querySelector('button[type="submit"]');
 const thankYou = document.getElementById('thank-you');
 thankYou.querySelector('.dialog-close').addEventListener('click', () => thankYou.close());
-thankYou.addEventListener('close', () => document.body.classList.remove('modal-open'));
+let modalScrollY = 0;
+function lockPageScroll() {
+  modalScrollY = window.scrollY;
+  document.body.classList.add('modal-open');
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${modalScrollY}px`;
+  document.body.style.width = '100%';
+}
+function unlockPageScroll() {
+  document.body.classList.remove('modal-open');
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.width = '';
+  const previousBehavior = document.documentElement.style.scrollBehavior;
+  document.documentElement.style.scrollBehavior = 'auto';
+  window.scrollTo(0, modalScrollY);
+  document.documentElement.style.scrollBehavior = previousBehavior;
+}
+thankYou.addEventListener('close', unlockPageScroll);
 const integrationDialog = document.getElementById('integration-dialog');
 const integrationName = document.getElementById('integration-name');
 let integrationShift = 0;
@@ -222,14 +240,15 @@ const positionIntegrationDialog = () => {
   const neededShift = Math.max(0, inputBottom - visibleBottom + 24);
   const availableShift = Math.max(0, dialogTop - visibleTop - 12);
   integrationShift = Math.min(neededShift, availableShift);
-  integrationDialog.style.transform = `translateY(-${integrationShift}px)`;
+  integrationDialog.style.setProperty('--integration-shift', `${integrationShift}px`);
   if (neededShift > availableShift) integrationDialog.scrollTop += neededShift - availableShift;
 };
 document.querySelector('.suggest-integration').addEventListener('click', () => {
   document.getElementById('integration-form').reset();
   document.getElementById('integration-status').textContent = '';
-  document.body.classList.add('modal-open');
+  lockPageScroll();
   integrationDialog.showModal();
+  document.getElementById('integration-title').focus({ preventScroll: true });
 });
 integrationName.addEventListener('focus', () => {
   if (!mobileViewport.matches) return;
@@ -242,9 +261,9 @@ window.addEventListener('resize', positionIntegrationDialog);
 integrationDialog.querySelector('.dialog-close').addEventListener('click', () => integrationDialog.close());
 integrationDialog.addEventListener('close', () => {
   integrationDialog.classList.remove('field-focused');
-  integrationDialog.style.transform = '';
+  integrationDialog.style.removeProperty('--integration-shift');
   integrationShift = 0;
-  document.body.classList.remove('modal-open');
+  unlockPageScroll();
 });
 let signupToken = null;
 async function postWaitlist(payload) {
@@ -271,7 +290,7 @@ form.addEventListener('submit', async event => {
     status.classList.add('success');
     document.getElementById('interest-form').reset();
     document.getElementById('interest-status').textContent = '';
-    document.body.classList.add('modal-open');
+    lockPageScroll();
     thankYou.showModal();
     form.reset();
   } catch (error) {
