@@ -245,9 +245,6 @@ footer.tile{min-height:310px;padding:57px clamp(34px,6vw,110px) 28px}
 .hero-copy>p{max-width:510px;margin-top:26px;color:#d2d2d5;font-size:16px;line-height:1.52}
 .hero-actions{gap:12px;margin-top:30px}
 .hero-actions .button{min-height:50px;padding:13px 23px;font-size:12px}
-.hero-video-link{background:rgba(0,0,0,.22);color:#fff;border-color:rgba(255,255,255,.38)}
-.hero-video-link:hover{background:rgba(255,255,255,.13)}
-.play-icon{display:inline-grid;place-items:center;width:20px;height:20px;border:1px solid #fff;border-radius:50%;font-size:8px;padding-left:1px}
 .early-row{display:flex;align-items:center;gap:14px;margin-top:34px}
 .avatars{display:flex;align-items:center}
 .avatars img,.avatars span{width:36px;height:36px;flex:none;border:2px solid #fff;border-radius:50%;margin-left:-8px;box-shadow:0 0 0 1px rgba(0,0,0,.2)}
@@ -889,3 +886,5 @@ body.modal-open{overflow:hidden}
 .suggest-integration:focus-visible{outline:2px solid currentColor}
 .integration-dialog h2:focus{outline:none}
 .integration-dialog{transform:translateY(calc(-22px - var(--integration-shift,0px)));overscroll-behavior:contain}
+.hero-actions .button-light{min-width:190px;font-size:14px}
+@media(max-width:720px){.hero-actions{display:block}.hero-actions .button-light{width:100%;min-height:54px;font-size:15px}}
