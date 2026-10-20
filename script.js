@@ -200,15 +200,35 @@ const thankYou = document.getElementById('thank-you');
 thankYou.querySelector('.dialog-close').addEventListener('click', () => thankYou.close());
 thankYou.addEventListener('close', () => document.body.classList.remove('modal-open'));
 const integrationDialog = document.getElementById('integration-dialog');
+const integrationName = document.getElementById('integration-name');
+const positionIntegrationDialog = () => {
+  if (!integrationDialog.open || !integrationDialog.classList.contains('field-focused') || !mobileViewport.matches) return;
+  const viewport = window.visualViewport;
+  integrationDialog.style.top = `${(viewport?.offsetTop || 0) + 12}px`;
+  integrationDialog.style.maxHeight = `${Math.max(220, (viewport?.height || innerHeight) - 24)}px`;
+  requestAnimationFrame(() => integrationName.scrollIntoView({ block: 'nearest', behavior: 'instant' }));
+};
 document.querySelector('.suggest-integration').addEventListener('click', () => {
   document.getElementById('integration-form').reset();
   document.getElementById('integration-status').textContent = '';
   document.body.classList.add('modal-open');
   integrationDialog.showModal();
-  document.getElementById('integration-name').focus();
 });
+integrationName.addEventListener('focus', () => {
+  if (!mobileViewport.matches) return;
+  integrationDialog.classList.add('field-focused');
+  positionIntegrationDialog();
+});
+window.visualViewport?.addEventListener('resize', positionIntegrationDialog);
+window.visualViewport?.addEventListener('scroll', positionIntegrationDialog);
+window.addEventListener('resize', positionIntegrationDialog);
 integrationDialog.querySelector('.dialog-close').addEventListener('click', () => integrationDialog.close());
-integrationDialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
+integrationDialog.addEventListener('close', () => {
+  integrationDialog.classList.remove('field-focused');
+  integrationDialog.style.top = '';
+  integrationDialog.style.maxHeight = '';
+  document.body.classList.remove('modal-open');
+});
 let signupToken = null;
 async function postWaitlist(payload) {
   const response = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });

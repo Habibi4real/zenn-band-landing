@@ -852,3 +852,11 @@ body.modal-open{overflow:hidden}
 .thank-you .section-wrap>p{font-size:14px}
 .thank-you label[for="delegate"]{display:block;max-width:520px;margin:0 auto 18px;text-align:center;font-size:clamp(23px,4vw,30px);font-weight:600;line-height:1.2;letter-spacing:-.035em}
 .thank-you #delegate{width:100%;box-sizing:border-box}
+@media(max-width:720px){
+  .integration-dialog.field-focused{bottom:auto;margin:0 auto}
+  .integration-dialog.field-focused .section-wrap{padding:38px 20px 20px}
+  .integration-dialog.field-focused h2{font-size:28px;line-height:1.1;margin-bottom:8px}
+  .integration-dialog.field-focused .section-wrap>p{font-size:12px;line-height:1.3}
+  .integration-dialog.field-focused form{margin-top:16px}
+  .integration-dialog.field-focused label{margin-bottom:7px}
+}
