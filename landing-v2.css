@@ -877,3 +877,6 @@ body.modal-open{overflow:hidden}
   .site-header .desktop-nav a+a{border-top:1px solid #17191b14}
 }
 @media(max-width:720px) and (prefers-reduced-motion:reduce){.menu-toggle span,.site-header .desktop-nav{transition:none}}
+
+.band-content h2{max-width:none;white-space:nowrap;font-size:clamp(28px,3.5vw,54px);letter-spacing:-.055em}
+@media(max-width:720px){.band-content h2{font-size:clamp(28px,8.5vw,50px)}}
