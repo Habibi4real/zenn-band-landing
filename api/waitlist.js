@@ -25,6 +25,14 @@ module.exports = async function handler(req, res) {
   if (!process.env.BLOB_READ_WRITE_TOKEN) return res.status(503).json({ error: 'The waitlist is temporarily unavailable. Please try again later.' });
 
   try {
+    if (req.body?.mode === 'integration') {
+      const integration = String(req.body?.integration || '').trim();
+      if (!integration || integration.length > 120) return res.status(400).json({ error: 'Enter an app or service name under 120 characters.' });
+      await put(`integration-suggestions/${randomUUID()}.json`, JSON.stringify({ integration, createdAt: new Date().toISOString() }), {
+        access: 'private', contentType: 'application/json'
+      });
+      return res.status(200).json({ ok: true });
+    }
     if (req.body?.mode === 'interests') {
       const emailHash = verifySignupToken(req.body?.signupToken);
       if (!emailHash) return res.status(403).json({ error: 'This signup session expired. Please join again to share your interests.' });

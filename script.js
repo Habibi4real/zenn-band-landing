@@ -122,6 +122,7 @@ let busyIndex = busyCount;
 let busyInView = false;
 let busySettleTimer;
 let busyAutoTimer;
+let busyMotionFrame = 0;
 const busyDistance = () => {
   const first = busyCards.querySelector('.busy-card');
   const gap = parseFloat(getComputedStyle(busyCards).gap) || 0;
@@ -129,8 +130,12 @@ const busyDistance = () => {
 };
 const jumpBusyTo = index => {
   busyCards.style.scrollBehavior = 'auto';
+  busyCards.style.scrollSnapType = 'none';
   busyCards.scrollLeft = index * busyDistance();
-  requestAnimationFrame(() => { busyCards.style.scrollBehavior = ''; });
+  requestAnimationFrame(() => {
+    busyCards.style.scrollBehavior = '';
+    busyCards.style.scrollSnapType = '';
+  });
 };
 const settleBusy = () => {
   busyIndex = Math.round(busyCards.scrollLeft / busyDistance());
@@ -141,23 +146,46 @@ const settleBusy = () => {
 };
 const moveBusy = direction => {
   clearTimeout(busySettleTimer);
+  cancelAnimationFrame(busyMotionFrame);
   busyIndex += direction;
-  busyCards.scrollTo({ left: busyIndex * busyDistance(), behavior: 'smooth' });
-  busySettleTimer = setTimeout(settleBusy, 750);
+  const from = busyCards.scrollLeft;
+  const to = busyIndex * busyDistance();
+  const duration = matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 720;
+  const started = performance.now();
+  busyCards.style.scrollBehavior = 'auto';
+  busyCards.style.scrollSnapType = 'none';
+  const frame = now => {
+    const progress = duration ? Math.min(1, (now - started) / duration) : 1;
+    const eased = 1 - Math.pow(1 - progress, 3);
+    busyCards.scrollLeft = from + (to - from) * eased;
+    if (progress < 1) {
+      busyMotionFrame = requestAnimationFrame(frame);
+    } else {
+      busyMotionFrame = 0;
+      busyCards.scrollLeft = to;
+      settleBusy();
+      busyCards.style.scrollBehavior = '';
+      busyCards.style.scrollSnapType = '';
+    }
+  };
+  busyMotionFrame = requestAnimationFrame(frame);
 };
 const scheduleBusyAuto = () => {
   clearTimeout(busyAutoTimer);
   if (!busyInView || document.hidden || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  busyAutoTimer = setTimeout(() => { moveBusy(1); scheduleBusyAuto(); }, 5000);
+  busyAutoTimer = setTimeout(() => { moveBusy(1); scheduleBusyAuto(); }, 4000);
 };
 busyPrevious.addEventListener('click', () => { moveBusy(-1); scheduleBusyAuto(); });
 busyNext.addEventListener('click', () => { moveBusy(1); scheduleBusyAuto(); });
 busyCards.addEventListener('pointerdown', scheduleBusyAuto);
 busyCards.addEventListener('scroll', () => {
+  if (busyMotionFrame) return;
   clearTimeout(busySettleTimer);
   busySettleTimer = setTimeout(settleBusy, 180);
 }, { passive: true });
 window.addEventListener('resize', () => {
+  cancelAnimationFrame(busyMotionFrame);
+  busyMotionFrame = 0;
   busyIndex = busyCount + ((busyIndex - busyCount) % busyCount + busyCount) % busyCount;
   jumpBusyTo(busyIndex);
 });
@@ -171,6 +199,16 @@ const submit = form.querySelector('button[type="submit"]');
 const thankYou = document.getElementById('thank-you');
 thankYou.querySelector('.dialog-close').addEventListener('click', () => thankYou.close());
 thankYou.addEventListener('close', () => document.body.classList.remove('modal-open'));
+const integrationDialog = document.getElementById('integration-dialog');
+document.querySelector('.suggest-integration').addEventListener('click', () => {
+  document.getElementById('integration-form').reset();
+  document.getElementById('integration-status').textContent = '';
+  document.body.classList.add('modal-open');
+  integrationDialog.showModal();
+  document.getElementById('integration-name').focus();
+});
+integrationDialog.querySelector('.dialog-close').addEventListener('click', () => integrationDialog.close());
+integrationDialog.addEventListener('close', () => document.body.classList.remove('modal-open'));
 let signupToken = null;
 async function postWaitlist(payload) {
   const response = await fetch('/api/waitlist', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
@@ -228,6 +266,33 @@ interestForm.addEventListener('submit', async event => {
   } catch (error) {
     interestStatus.textContent = error.message;
     interestStatus.classList.add('error');
+  } finally {
+    button.disabled = false;
+  }
+});
+
+const integrationForm = document.getElementById('integration-form');
+integrationForm.addEventListener('submit', async event => {
+  event.preventDefault();
+  const integration = document.getElementById('integration-name').value.trim();
+  const integrationStatus = document.getElementById('integration-status');
+  const button = integrationForm.querySelector('button[type="submit"]');
+  integrationStatus.className = 'form-status';
+  if (!integration) {
+    integrationStatus.textContent = 'Please name an app or service.';
+    integrationStatus.classList.add('error');
+    return;
+  }
+  button.disabled = true;
+  integrationStatus.textContent = 'Sending…';
+  try {
+    await postWaitlist({ mode: 'integration', integration });
+    integrationStatus.textContent = 'Thanks! Your suggestion has been saved.';
+    integrationStatus.classList.add('success');
+    integrationForm.reset();
+  } catch (error) {
+    integrationStatus.textContent = error.message;
+    integrationStatus.classList.add('error');
   } finally {
     button.disabled = false;
   }
