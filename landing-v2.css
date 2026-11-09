@@ -888,3 +888,14 @@ body.modal-open{overflow:hidden}
 .integration-dialog{transform:translateY(calc(-22px - var(--integration-shift,0px)));overscroll-behavior:contain}
 .hero-actions .button-light{min-width:190px;font-size:14px}
 @media(max-width:720px){.hero-actions{display:block}.hero-actions .button-light{width:100%;min-height:54px;font-size:15px}}
+
+
+/* Zenn footer: one legal/support navigation instead of Product and Company columns. */
+.footer-top{grid-template-columns:minmax(0,1.6fr) minmax(160px,.8fr) minmax(0,1.2fr);gap:clamp(24px,3vw,40px)}
+.footer-bottom{justify-content:flex-start}
+@media(max-width:720px){
+  .footer-top{grid-template-columns:1fr;gap:30px}
+  .footer-top .footer-brand,.footer-top nav[aria-label="Legal and support links"],.footer-top .footer-join{grid-column:1/-1}
+  .footer-top nav[aria-label="Legal and support links"]{align-items:center;text-align:center}
+  .footer-bottom{justify-content:center}
+}
